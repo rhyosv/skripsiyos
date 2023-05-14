@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+  <br>
+  <center>
+    <h2>Sistem Klasifikasi Limbah Menggunakan Metode <i>Convolutional Neural Network</i>  Pada Web Service Berbasis Framework Flask</h2>
+  </center>
+	<div class="row">
+    <div class="col-md-6 classy_frame" style="padding-top: 0%;">
+      <center><h3 style="text-transform: capitalize;">Klasifikasikan Gambar Limbahmu</h3></center>
+      <img id="preview" src="{{ url_for('static', filename = 'images/reuse1.png') }}" height="400px" width="100%" title = "client pic">
+      
+      <center>
+        <br>
+        <div class="image-upload">
+          <p style="color:wheat;" id="upload-web">Klik ikon unggah gambar di bawah ini untuk mengunggah gambar.</p style="color:wheat;"">
+          <p style="color:wheat;" id="upload-mobile">Klik ikon kamera di bawah ini untuk mengklik gambar.</p style="color:wheat;"">
+          
+          <label for="file">
+              <img id="upload-web" src="{{ url_for('static', filename = 'images/upload.png') }}"/>
+              <img id="upload-mobile" src="{{ url_for('static', filename = 'images/camera.png') }}"/>
+
+          </label>
+          <input type="file" name="file" id="file" onchange="previewImage()">
+        </div>
+
+        <br>
+        <button class="classify-button" onclick="classifyWaste()">Klasifikasikan Awan Anda</button>
+      </center>
+      <br>
+    </div>
+
+    <div class="col-md-6 classy_frame" style="padding-top: 0%;" id="about">
+      <center><h3 style="text-transform: capitalize;">Tentang Aplikasi ini</h3></center>
+      <h4>Dunia menghasilkan setidaknya 3,5 juta ton sampah per hari dan jumlah ini terus meningkat dari hari ke hari
+        itulah mengapa kita perlu mengetahui tentang sampah.<br><br>Aplikasi ini bertujuan untuk mengklasifikasikan sampah Anda dengan 9 clas sampah yang berbeda.
+        Proses daur ulang dari bahan limbah ini sangat sulit dan bahkan sangat sulit untuk mengklasifikasikan 9 limbah yang berbeda di pabrik daur ulang.<br><br>Tetapi bagaimana jika setiap orang membuat 9 sampah untuk 9 clas limbah yang berbeda dan membuangnya ke
+        sampah tertentu menurut bahan limbah itu akan jauh lebih baik untuk pembersih dan pabrik daur ulang untuk diklasifikasikan
+        dan mendaur ulang sampah. Semua orang harus melakukan ini karena sekitar 70% sampah tidak didaur ulang hanya karena tidak diklasifikasikan. Maka dari itu dengan adanya program ini semoga dapat membantu memecahkan permasalahan tersebut.
+        <br><br><br><br><br><br>
+      </h4>
+    </div>
+  </div>
+
+	<div class="row" id="recycling-videos">
+    <br>
+    <hr>
+    <h3 id="video-title"></h3>
+    <div class="col-md-6 col-xs-6 classy_frame" style="padding-top: 0%; padding-bottom: 2%;">
+      <div class="embed-responsive embed-responsive-16by9"> 
+        <iframe id="video1" width="560" height="315" src="https://www.youtube.com/embed/zO3jFKiqmHo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-6 classy_frame" style="padding-top: 0%; padding-bottom: 2%;">
+      <div class="embed-responsive embed-responsive-16by9"> 
+        <iframe id="video2" width="560" height="315" src="https://www.youtube.com/embed/I_fUpP-hq3A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="what-if">
+    <br>
+    <hr>
+    <div class="col-md-6 col-xs-6 classy_frame" style="padding-top: 0%; padding-bottom: 2%;">
+      <center><h2 style="text-transform: capitalize;">Apa Yang terjadi jika kita berhenti mendaur ulang?</h2></center>
+      <h4>Selama ini, proses daur ulang cenderung dilihat dari segi kuantitas, bukan pada kualitas material yang didaur ulang. Padahal, hal ini tidak kalah penting. Kualitas bahan daur ulang merujuk pada tingkat kebersihan dan kualitas bahan daur ulang dari sampah plastik tersebut.
+
+        Bahan daur ulang yang tidak berkualitas biasanya telah terkontaminasi. Atas alasan inilah, Cina akhirnya tidak mau lagi menerima bahan daur ulang berkualitas rendah.
+        
+        ''Untuk hal ini, harus ada pembenahan bahkan dari awal sampah plastik dikumpulkan dari tingkat rumah tangga, kemudian pengumpulan yang komprehensif, dan ada pembagian mulai dari botol plastik, kaleng minuman, dan cangkir kopi dari karton,'' tutur ahli lingkungan dari Universitas Nottingham Trent, Christine Cole, seperti dikutip Science Alert.</h4>
+      <div class="embed-responsive embed-responsive-16by9"> 
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-6 classy_frame" style="padding-top: 0%; padding-bottom: 2%;">
+      <center><h2 style="text-transform: capitalize;">Dunia bersih dari limbah sampah?</h2></center>
+      <h4>Sampah masih menjadi masalah besar di seluruh belahan dunia, termasuk di Indonesia, dan merupakan salah satu permasalahan pelik yang harus ditangani segera. Kami juga menyadari bahwa untuk terlepas dari permasalahan sampah, khususnya sampah plastik, kolaborasi yang sinergis dari seluruh pemangku kepentingan sangat diperlukan. Sebagai produsen, kami berupaya untuk terus dapat mengambil tindakan nyata dalam menciptakan ekosistem lingkungan yang lestari. Kami juga ingin merangkul seluruh pihak mulai dari pemerintah, konsumen, dan lainnya, agar bersama-sama kita dapat menciptakan masa depan yang bebas sampah.</h4>
+      <div class="embed-responsive embed-responsive-16by9"> 
+      </div>
+    </div>
+  </div>
+
+
+	<div class="row" id="motivation">
+    <br>
+    <hr>
+    <h3>Kenapa harus dari kesadaran diri sendiri</h3>
+    <div class="col-md-12 classy_frame" style="padding-top: 0%; padding-bottom: 2%;">
+      <div class="embed-responsive embed-responsive-16by9"> 
+        <h4>Kesadaran Masyarakat terhadap kerbesihan dalam agama disebutkan Orang mengatakan bahwa kebersihan merupakan sebagian dari iman. Kebersihan adalah hal yang mutlak dibutuhkan oleh setiap orang yang tinggal di dalam lingkungan hidup. Lingkungan hidup yang bersih, menciptakan rasa kenyamanan serta kesehatan bagi setiap individu yang tinggal di dalamnya.
+
+          Bayangkan saja, seandainya lingkungan hidup yang Anda tinggali kotor, maka rasa tidak nyaman akan menghampiri. Kemungkinan timbulnya berbagai penyakit pun lebih besar dibandingkan dengan lingkungan hidup yang bersih.
+          
+          Sebagai contoh, rumah Anda kotor. Banyak sampah dan genangan air di sekitar rumah Anda. Maka, nyamuk-nyamuk demam berdarah dapat berkembang biak dengan subur. Menyebabkan anggota keluarga Anda, bahkan orang-orang yang tinggal di sekitar Anda memiliki peluang besar terkena penyakit demam berdarah.</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="quotes">
+    <br>
+    <hr>>
+    <div class="col-md-6 col-xs-6 classy_frame" style="padding-top: 0%;">
+      <h4>Satu langkah Anda untuk mendaur ulang sampah dapat membuat hidup petugas kebersihan 10 menit lebih baik.<br> &nbsp;</h4>
+    </div>
+  </div>
+</div>
+
+<script>
+  var imgData;
+  var loading = document.getElementById("loading");
+  var whatif = document.getElementById("what-if");
+  var motivation = document.getElementById("motivation");
+  var quotes = document.getElementById("quotes");
+  var recyclingvideos = document.getElementById("recycling-videos");
+
+  whatif.style.display = "none";
+  motivation.style.display = "none";
+  quotes.style.display = "none";
+  recyclingvideos.style.display = "none";
+  
+  function previewImage(){
+      
+    var file = document.getElementById("file").files;
+    if(file.length>0){
+      var fileName = file[0].name;
+      var allowed_extensions = new Array("jpeg", "jpg","png");
+      var file_extension = fileName.split('.').pop().toLowerCase(); 
+
+      if(allowed_extensions[0] == file_extension || allowed_extensions[1] == file_extension || allowed_extensions[2] == file_extension){
+        var imgObj = document.getElementById("preview");
+        var fileReader = new FileReader();
+
+        fileReader.onload = function(event){
+          document.getElementById("preview").setAttribute("src", event.target.result);
+          imgData = event.target.result;
+        };
+
+        fileReader.readAsDataURL(file[0]);
+      }
+      else{
+        document.getElementById("file").value = "";
+        document.getElementById("errorTitle").innerHTML = "Error - Hanya File image tertentu yang dapat diklasifikasi";
+        document.getElementById("errorMessage").innerHTML = "Kita hanya menerima file gambar berupa .jpeg .jpg or .png extensions.";
+        $("#errorPopup").modal("show");
+
+      }
+
+      
+    }
+  }
+
+  function classifyWaste(){
+    var file = document.getElementById("file").files;
+    if(file.length > 0){
+      loading.style.display = "block";
+      whatif.style.display = "block";
+      motivation.style.display = "block";
+      quotes.style.display = "block";
+      recyclingvideos.style.display = "block";
+
+      var form_data = new FormData();
+      form_data.append("file", document.getElementById("file").files[0]);
+      $.ajax({
+        url: 'classifywaste', // point to server-side URL
+        dataType: 'json', // what to expect back from server
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function (data) {
+      
+          var predicted_value = data["predicted_value"];
+          var details = data["details"];
+          var video1 = data["video1"];
+          var video2 = data["video2"];
+
+          var about = document.getElementById("about");
+          var videotitle = document.getElementById("video-title");
+
+          about.innerHTML = "<center><h3>Ini Termasuk Dalam Limbah <b style='background-color: #0b2438;'>" + predicted_value + "</b> </h3></center><h4>"+ details +"</h4>";
+          videotitle.innerHTML = "Bagaimana Daur ulang "+ predicted_value +" bekerja?";
+
+          document.getElementById("video1").setAttribute("src", "https://www.youtube.com/embed/" + video1);
+          document.getElementById("video2").setAttribute("src", "https://www.youtube.com/embed/" + video2);
+
+          loading.style.display = "none";
+        }
+
+      });
+    }
+    else{
+      document.getElementById("errorTitle").innerHTML = "Error - Gambar Belum diupload";
+      document.getElementById("errorMessage").innerHTML = "Silahkan upload gambar limbah anda.";
+      $("#errorPopup").modal("show");
+    }
+  }
+</script>
+
+
+{% endblock %}
